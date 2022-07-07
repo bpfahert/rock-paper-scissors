@@ -1,6 +1,33 @@
 
 let playerSelection = "none";
-let computerSelection = "none;"
+let computerSelection = "none";
+
+//querySelect buttons, event selectors, and update div to show results
+const rock = document.querySelector('#rock');
+const paper = document.querySelector('#paper');
+const scissors = document.querySelector('#scissors');
+let playerresults = document.querySelector('#playerwins');
+let cpuresults = document.querySelector('#cpuwins');
+let victor = document.querySelector('#victor');
+
+rock.addEventListener('click', () => {
+    playRound("rock");
+    playerresults.textContent = `Player victories: ${playerWins}`;
+    cpuresults.textContent = `Computer victories: ${cpuWins}`;
+});
+
+paper.addEventListener('click', () => {
+    playRound("paper");
+    playerresults.textContent = `Player victories: ${playerWins}`;
+    cpuresults.textContent = `Computer victories: ${cpuWins}`;
+});
+
+scissors.addEventListener('click', () => {
+    playRound("scissors");
+    playerresults.textContent = `Player victories: ${playerWins}`;
+    cpuresults.textContent = `Computer victories: ${cpuWins}`;
+});
+
 
 //initalize variables to store player and computer victories
 let playerWins = 0;
@@ -25,14 +52,11 @@ function computerPlay() {
 //function to play a single round of RPS
 function playRound(playerSelection, computerSelection) {
 
-    //ask for player selection and store in playerSelection variable
-    playerSelection = prompt("Rock, paper, or scissors?").toLowerCase();
     computerSelection = computerPlay();
     
     switch (true) { 
         case playerSelection === computerSelection:
             alert(`It's a tie! You both selected ${playerSelection}`);
-            playRound(playerSelection, computerSelection);
             break;
         case playerSelection === "rock" && computerSelection === "paper":
             alert("You lose this round! Paper beats rock!");
@@ -58,27 +82,15 @@ function playRound(playerSelection, computerSelection) {
             alert("You win this round! Scissors beats paper!");
             playerWins +=1;
             break;
-        default:
-            alert("You didn't choose rock, paper, or scissors so this round is forfeited!");
-            cpuWins +=1;
+
     }   
-}
-
-//function to play a 5 round game of RPS and print the winner
-function game() {
-    for (let i = 0; i < 5; i++) {
-        playRound(playerSelection, computerSelection);
-
-        if (playerWins === 3) {
-            alert("You win the game!")
-        }
-        else if (cpuWins === 3) {
-            alert("The computer wins the game!");
-        }
+    if (playerWins === 5) {
+        alert("You win the game!") 
+    }
+    else if (cpuWins === 5) {
+        alert("The computer wins the game!");
     }
 }
-
-game();
 
 console.log(playerWins);
 console.log(cpuWins);
